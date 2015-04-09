@@ -28,6 +28,23 @@ $(function(){
     });
   }
 
+  var getPhotos = function(cityName) {
+    $.ajax({
+      method: "GET",
+      // jsonp: 'cb',
+      dataType: "jsonp",
+      data: { access_token: '1823733851.08863ca.3eedd7db308f4966ad673d8877fc2a32'},
+      url: "https://api.instagram.com/v1/tags/" + cityName + "/media/recent",
+      success: function(response){
+        $("#city-photos").empty();
+        var image_url = response.data[1].images.standard_resolution.url
+        $('#city-photos').append('<img src="' + image_url + '">');
+        console.log(response);
+      }
+    });
+  }
+
+
   $('#submit-button').on('click', function(e){
     e.preventDefault;
 
@@ -51,6 +68,7 @@ $(function(){
     cities.forEach(function(city) {
       if(city.name === cityName) {
         getWeather(city.zmw, cityName);
+        getPhotos(cityName.substring(0, cityName.indexOf(',')));
       }
     });
     // $(this).attr('id')
