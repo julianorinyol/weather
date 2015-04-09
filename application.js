@@ -1,24 +1,14 @@
 $(function(){
-console.log('doc ready')
+  console.log('doc ready')
 
+  var counter = 0;
 
-cities = [];
-var city_objs = [];
-
-var counter = 0;
-
-var sortCities = function(cityObj){
-  cityObj.forEach(function(city) {
-
-     console.log(city);
-
-     $('body').append( "<br><button id='" + counter + "'>" + city.name +"</button>");
-    counter++;
-   });
-
-
-
-}
+  var sortCities = function(cityObj){
+    cityObj.forEach(function(city) {
+       $('body').append( "<br><button id='" + counter + "'>" + city.name +"</button>");
+      counter++;
+     });
+  }
 
   $('#submit-button').on('click', function(e){
     e.preventDefault;
