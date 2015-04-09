@@ -5,13 +5,15 @@ console.log('doc ready')
 cities = [];
 var city_objs = [];
 
+var counter = 0;
 
 var sortCities = function(cityObj){
   cityObj.forEach(function(city) {
+
      console.log(city);
 
-     $('body').append( "<br><button>" + city.name +"</button>" );
-   // city_objs.RESULTS[0].name
+     $('body').append( "<br><button id='" + counter + "'>" + city.name +"</button>");
+    counter++;
    });
 
 
@@ -38,6 +40,7 @@ var sortCities = function(cityObj){
 
   });
 
+  $('')
 
 
 });
