@@ -9,15 +9,21 @@ $(function(){
      });
   }
 
-  var getWeather = function(id) {
+  var getWeather = function(zmw, cityName) {
     $.ajax({
       method: "GET",
       // jsonp: 'cb',
       dataType: "jsonp",
-      // url: "http://api.wunderground.com/api/4c2c6e229659e196/forecast/q/zmw:" + id + ".json",
-      url: "http://api.wunderground.com/api/6cc5df2c6acc5d95/forecast/q/zmw:" + id + ".json",
+      // url: "http://api.wunderground.com/api/4c2c6e229659e196/forecast/q/zmw:" + zmw + ".json",
+      url: "http://api.wunderground.com/api/6cc5df2c6acc5d95/forecast/q/zmw:" + zmw + ".json",
       success: function(response){
-        console.log('success')
+        console.log(response);
+        $("#weather-result").empty();
+       $('#weather-result').append("<p>" + cityName + "</p>");
+       $('#weather-result').append("<p>high fahrenheit: " + response.forecast.simpleforecast.forecastday[0].high.fahrenheit + "</p>");
+       $('#weather-result').append("<p>low farenheit: " + response.forecast.simpleforecast.forecastday[0].low.fahrenheit + "</p>");
+
+        // $('#weather-result').append()
       }
     });
   }
@@ -27,7 +33,6 @@ $(function(){
 
     console.log('clicked');
     var query = $('#city-search-field').val();
-    // console.log('search = ' + query);
 
     $.ajax({
       method: "GET",
@@ -45,7 +50,7 @@ $(function(){
     var cityName = $(this).text()
     cities.forEach(function(city) {
       if(city.name === cityName) {
-        getWeather(city.zmw);
+        getWeather(city.zmw, cityName);
       }
     });
     // $(this).attr('id')
